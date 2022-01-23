@@ -1,0 +1,92 @@
+<div class="mb-3">
+  <label for="prdCat" class="form-label">Category:</label>
+  <!-- <select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)"> -->
+  <!-- <select class="form-control" name="cat" id="prdCat" (change)="getSelCat($event)"> //In ts:// event.target.value -->
+
+  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID">
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+<div class="text-secondary">
+  [To be Removed] For test:
+  {{selectedCatID}}
+  <button type="button" class="btn btn-primary" (click)="changeCat()">(Test) change Category</button>
+  <br>
+  Order's Date: {{orderDate | date: 'longDate'}}
+</div>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Av. Quantity</th>
+      <th>Price in USD</th>
+      <th>Price in EGP</th>
+      <th>Count</th>
+      <th>Buy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let prd of prdList; index as i" -->
+    <!-- trackBy used to specify iterable objects identity,
+            and so enhance the performance of ngFor in case of changes to the collection
+            ,and updated the changed object, without re-build the DOM -->
+    <!-- <tr *ngFor="let prd of prdList; let i = index; trackBy:prdTrackByFn"
+          [class.d-none]="selectedCatID!=prd.categoryID"
+          [style.background-color]="(prd.quantity==0)? 'yellow': 'lightgray'">
+      -->
+    <!-- <tr *ngFor="let prd of prdList; let i = index" [hidden]="prd.quantity==0"> -->
+    <!--
+        - ngIf (Stuructural directives in general) change in DOM,
+          while class binding or [hidden] just change the dom element to be hidden.
+          so, use ngIF, if collection isn't changed reguraly in the runtime,
+          and use binding, of the collection is reguraly changed.
+        -We can't use 2 structural directives on the same HTML element,
+         but we can use <ng-container> that will not refelect on the actual dom.
+        - ng-container vs ng-template vs ng-content
+          https://www.freecodecamp.org/news/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691/-->
+    <!-- <ng-container *ngFor="let prd of prdList; let i = index">
+            <tr *ngIf="prd.quantity!=0"> -->
+
+    <!-- <tr *ngFor="let prd of prdList; let i = index" [class.bg-warning]="prd.quantity==0"> -->
+    <!-- <tr *ngFor="let prd of prdList; let i = index" [ngClass]="{'bg-warning':prd.quantity==0, 'text-primary': prd.quantity==0}"> -->
+      <!-- is more powerful. It allows you to bind a string of classes, an array of strings, or an object like in your example.
+        https://stackoverflow.com/questions/45321526/difference-between-ngclass-vs-class-binding -->
+    <tr *ngFor="let prd of prdList; let i = index" [ngStyle]="{'background-color':prd.quantity==0? 'lightyellow': 'lightgray', 'color': prd.quantity==0? 'darkred': 'darkblue'}">
+      <td>{{i+1}}</td>
+      <!-- safe naviagation operator -->
+      <td>{{prd?.name}}</td>
+      <td>
+        <!-- <img LightBox highlightColor="red" [src]="prd.imgURL" alt=""></td> -->
+        <!-- <img LightBox="red" [src]="prd.imgURL" alt=""> -->
+        <!-- <img [LightBox]="ReadFromPropInTS" [src]="prd.imgURL" alt=""> -->
+        <img LightBox="red" defaultColor="gray" [src]="prd.imgURL" alt="">
+      </td>
+      <td>
+        <!-- <div *ngIf="prd.quantity!=0">{{prd.quantity}}</div>
+        <div *ngIf="prd.quantity==0">Out of Stock</div> -->
+
+        <!-- <div *ngIf="prd.quantity!=0; else outOfStock">{{prd.quantity}}</div>
+        <ng-template #outOfStock>Out of Stock</ng-template> -->
+        <ng-container [ngSwitch]="prd.quantity">
+          <div *ngSwitchCase="0">Out of stock</div>
+          <div *ngSwitchCase="1">last item!</div>
+          <div *ngSwitchCase="2">Last 2 items</div>
+          <div *ngSwitchDefault>{{prd.quantity}}</div>
+        </ng-container>
+      </td>
+      <td>{{prd.price | currency: 'USD': 'symbol'}}</td>
+      <td>{{prd.price | USDtoEGP: 10 | currency:'EGP': 'code'}}</td>
+      <!-- Template variable -->
+      <td><input #itemsCount type="number" class="form-control"></td>
+      <td><button type="button" class="btn btn-secondary" (click)="buy(prd.price, itemsCount.value)">Buy</button></td>
+    </tr>
+    <!-- </ng-container> -->
+  </tbody>
+</table>
+<hr>
+<h3>
+  Order Total price: {{orderTotalPrice}}
+</h3>
