@@ -1,0 +1,22 @@
+<h2>Create Your Order:</h2>
+<div class="mb-3">
+  <label for="prdCat" class="form-label">Category:</label>
+  <!-- <select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)"> -->
+  <!-- <select class="form-control" name="cat" id="prdCat" (change)="getSelCat($event)"> //In ts:// event.target.value -->
+  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID" >
+    <option value="0" selected>All</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+<hr>
+<div class="bg-warning">
+  <app-product-list [sentCatID]="selectedCatID" (totalPriceChanged)="onTotalPriceChanged($event)"></app-product-list>
+</div>
+
+<hr>
+<div>
+  <h3>Enter Your name:</h3>
+  <input #clientNameInp type="text" class="form-control" >
+</div>
+<h3>Order Total Price: {{receivedOrderTotalPrice}} </h3>
+<button type="button" class="btn btn-success" (click)="completeOrder()">Place Order</button>

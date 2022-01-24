@@ -11,6 +11,7 @@ import { ProductListComponent } from './Components/Order/product-list/product-li
 import { FormsModule } from '@angular/forms';
 import { LightBoxDirective } from './Directives/light-box.directive';
 import { USDtoEGPPipe } from './Pipes/usdto-egp.pipe';
+import { OrderMasterComponent } from './Components/Order/order-master/order-master.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { USDtoEGPPipe } from './Pipes/usdto-egp.pipe';
     HomeComponent,
     ProductListComponent,
     LightBoxDirective,
-    USDtoEGPPipe
+    USDtoEGPPipe,
+    OrderMasterComponent
   ],
   imports: [
     BrowserModule,

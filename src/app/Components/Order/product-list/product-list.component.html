@@ -1,19 +1,20 @@
-<div class="mb-3">
+<!-- <div class="mb-3">
   <label for="prdCat" class="form-label">Category:</label>
-  <!-- <select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)"> -->
-  <!-- <select class="form-control" name="cat" id="prdCat" (change)="getSelCat($event)"> //In ts:// event.target.value -->
+  <select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)">
+  <select class="form-control" name="cat" id="prdCat" (change)="getSelCat($event)"> //In ts:// event.target.value
 
-  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID">
+  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID" (change)="filterProductsByCatID()">
     <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
   </select>
-</div>
-<div class="text-secondary">
+</div> -->
+
+<!-- <div class="text-secondary">
   [To be Removed] For test:
   {{selectedCatID}}
   <button type="button" class="btn btn-primary" (click)="changeCat()">(Test) change Category</button>
   <br>
   Order's Date: {{orderDate | date: 'longDate'}}
-</div>
+</div> -->
 <hr>
 <table class="table">
   <thead>
@@ -52,9 +53,11 @@
 
     <!-- <tr *ngFor="let prd of prdList; let i = index" [class.bg-warning]="prd.quantity==0"> -->
     <!-- <tr *ngFor="let prd of prdList; let i = index" [ngClass]="{'bg-warning':prd.quantity==0, 'text-primary': prd.quantity==0}"> -->
-      <!-- is more powerful. It allows you to bind a string of classes, an array of strings, or an object like in your example.
+    <!-- is more powerful. It allows you to bind a string of classes, an array of strings, or an object like in your example.
         https://stackoverflow.com/questions/45321526/difference-between-ngclass-vs-class-binding -->
-    <tr *ngFor="let prd of prdList; let i = index" [ngStyle]="{'background-color':prd.quantity==0? 'lightyellow': 'lightgray', 'color': prd.quantity==0? 'darkred': 'darkblue'}">
+
+    <tr *ngFor="let prd of prdListOfCat; let i = index"
+      [ngStyle]="{'background-color':prd.quantity==0? 'lightyellow': 'lightgray', 'color': prd.quantity==0? 'darkred': 'darkblue'}">
       <td>{{i+1}}</td>
       <!-- safe naviagation operator -->
       <td>{{prd?.name}}</td>
@@ -62,7 +65,7 @@
         <!-- <img LightBox highlightColor="red" [src]="prd.imgURL" alt=""></td> -->
         <!-- <img LightBox="red" [src]="prd.imgURL" alt=""> -->
         <!-- <img [LightBox]="ReadFromPropInTS" [src]="prd.imgURL" alt=""> -->
-        <img LightBox="red" defaultColor="gray" [src]="prd.imgURL" alt="">
+        <img LightBox="red" defaultColor="yellow" [src]="prd.imgURL" alt="">
       </td>
       <td>
         <!-- <div *ngIf="prd.quantity!=0">{{prd.quantity}}</div>
@@ -87,6 +90,7 @@
   </tbody>
 </table>
 <hr>
-<h3>
+<!-- <h3 class="text-danger">
+  [To be Removed] For Test:<br>
   Order Total price: {{orderTotalPrice}}
-</h3>
+</h3> -->
