@@ -7,6 +7,7 @@ import { OrderMasterComponent } from './Components/Order/order-master/order-mast
 import { ProductDetailsComponent } from './Components/Order/product-details/product-details.component';
 import { ProductListComponent } from './Components/Order/product-list/product-list.component';
 import { UserLoginComponent } from './Components/UserLogin/UserLogin.component';
+import { AuthGuard } from './Gaurds/auth.guard';
 
 const routes: Routes = [ // First-match wins strategy
   {path: '', component: MainLayoutComponent, children:[
@@ -14,9 +15,10 @@ const routes: Routes = [ // First-match wins strategy
     {path: 'Home', component: HomeComponent},
     {path: 'Products', component: ProductListComponent},
     {path: 'Products/:pid', component: ProductDetailsComponent},
-    {path: 'Order', component: OrderMasterComponent},
+    {path: 'Order', component: OrderMasterComponent, canActivate:[AuthGuard]},
   ]},
   {path:'Login', component:UserLoginComponent},
+  {path:'Logout', component:UserLoginComponent},
   {path: '**', component:NotFoundComponent}// Wild card path
 ];
 
