@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddProductComponent } from './Components/add-product/add-product.component';
 import { HomeComponent } from './Components/home/home.component';
 import { MainLayoutComponent } from './Components/MainLayout/MainLayout.component';
 import { NotFoundComponent } from './Components/NotFound/NotFound.component';
@@ -15,6 +16,7 @@ const routes: Routes = [ // First-match wins strategy
     {path: 'Home', component: HomeComponent},
     {path: 'Products', component: ProductListComponent},
     {path: 'Products/:pid', component: ProductDetailsComponent},
+    {path: 'Product/Add', component: AddProductComponent},
     {path: 'Order', component: OrderMasterComponent, canActivate:[AuthGuard]},
   ]},
   {path:'Login', component:UserLoginComponent},

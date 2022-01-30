@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { IProduct } from 'src/app/Models/iproduct';
+import { ProductsService } from 'src/app/Services/products.service';
 import { StaticProductsService } from 'src/app/Services/static-products.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class ProductListComponent implements OnInit, OnChanges {
   orderTotalPrice: number = 0;
   orderDate: Date;
 
-  constructor(private staticPrdService: StaticProductsService
+  constructor(private prdService:ProductsService
+            // , private staticPrdService: StaticProductsService
             , private router:Router) {
     this.totalPriceChanged=new EventEmitter<number>();
     // this.prdList = [
@@ -36,11 +38,18 @@ export class ProductListComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     // this.filterProductsByCatID();
-    this.prdListOfCat=this.staticPrdService.getProductsByCatID(this.sentCatID);
+    // this.prdListOfCat=this.staticPrdService.getProductsByCatID(this.sentCatID);
+    this.prdService.getProductsByCatID(this.sentCatID)
+      .subscribe(products=>{
+        this.prdListOfCat=products;
+      });
   }
 
   ngOnInit(): void {
-    this.prdListOfCat=this.staticPrdService.getAllProducts();
+    this.prdService.getAllProducts()
+      .subscribe(products=>{
+        this.prdListOfCat=products;
+      });
   }
 
   prdTrackByFn(index: number, prd: IProduct): number {
