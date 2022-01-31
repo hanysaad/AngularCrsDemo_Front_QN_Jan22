@@ -9,7 +9,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { ProductListComponent } from './Components/Order/product-list/product-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LightBoxDirective } from './Directives/light-box.directive';
 import { USDtoEGPPipe } from './Pipes/usdto-egp.pipe';
 import { OrderMasterComponent } from './Components/Order/order-master/order-master.component';
@@ -18,6 +18,7 @@ import { NotFoundComponent } from './Components/NotFound/NotFound.component';
 import { MainLayoutComponent } from './Components/MainLayout/MainLayout.component';
 import { ProductDetailsComponent } from './Components/Order/product-details/product-details.component';
 import { AddProductComponent } from './Components/add-product/add-product.component';
+import { UserRegisterComponent } from './Components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +35,14 @@ import { AddProductComponent } from './Components/add-product/add-product.compon
     NotFoundComponent,
     MainLayoutComponent,
     ProductDetailsComponent,
-    AddProductComponent
+    AddProductComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [

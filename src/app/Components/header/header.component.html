@@ -13,6 +13,9 @@
         <a class="nav-link" routerLink="/Order" routerLinkActive="active">Order</a>
         <a class="nav-link" [hidden]="isUserLogged" routerLink="/Login" routerLinkActive="active">Login</a>
         <a class="nav-link" [hidden]="!isUserLogged" routerLink="/Logout" routerLinkActive="active">Logout</a>
+        <a class="nav-link" [hidden]="isUserLogged" routerLink="/Register" routerLinkActive="active">Register</a>
+        <a class="nav-link" [hidden]="!isUserLogged" routerLink="/User/UserProfile" routerLinkActive="active">UserProfile</a>
+        <a class="nav-link" [hidden]="!isUserLogged" routerLink="/User/EditProfile" routerLinkActive="active">Edit Profile</a>
       </div>
 
     </div>
