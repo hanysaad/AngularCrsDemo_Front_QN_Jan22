@@ -16,6 +16,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
      INSTEAD, use Async validator to call API,
       that takes the email value and returns boolean
      https://angular.io/guide/form-validation#creating-asynchronous-validators
+     https://www.concretepage.com/angular-2/angular-custom-async-validator-example#AsyncValidatorFn
      https://www.tektutorialshub.com/angular/angular-async-validator-example/
      https://www.thisdot.co/blog/using-custom-async-validators-in-angular-reactive-forms
      https://codinglatte.com/posts/angular/how-to-add-async-validators-to-an-angular-reactive-form/
